@@ -1,0 +1,51 @@
+<ui-section-header
+  kicker="~/contact"
+  title="Get in touch"
+  [lead]="'Himanshu Anand is open to senior backend, platform and full-stack engineering opportunities — remote or in Noida, India. Reach out by email, phone or LinkedIn and expect a response within a day or two.'"
+/>
+
+<div class="contact-grid">
+  <a class="card" [href]="emailHref">
+    <ui-icon name="mail" class="card__icon" />
+    <div>
+      <h2 class="card__label">Email</h2>
+      <p class="card__value">{{ profile.email }}</p>
+    </div>
+  </a>
+
+  <a class="card" [href]="telHref">
+    <ui-icon name="send" class="card__icon" />
+    <div>
+      <h2 class="card__label">Phone</h2>
+      <p class="card__value">{{ profile.phone }}</p>
+    </div>
+  </a>
+
+  @for (social of profile.socials; track social.label) {
+    @if (social.icon !== 'mail') {
+      <a class="card" [href]="social.url" rel="noopener noreferrer" target="_blank">
+        <ui-icon [name]="social.icon" class="card__icon" />
+        <div>
+          <h2 class="card__label">{{ social.label }}</h2>
+          <p class="card__value">{{ social.handle }}</p>
+        </div>
+      </a>
+    }
+  }
+</div>
+
+<ui-panel kicker="availability" title="Current status" wide>
+  <p class="status-line">
+    <span class="status-line__dot" aria-hidden="true"></span>
+    {{ profile.availability }} · {{ profile.location }}
+  </p>
+  <p>
+    Best fit: senior/lead backend or full-stack roles involving Node.js, NestJS, TypeScript,
+    distributed systems, event-driven architecture, or AI platform engineering (Agentic RAG, MCP).
+  </p>
+  <p>
+    <a [href]="pdfHref" download>Download the PDF resume</a> ·
+    <a routerLink="/faq">Read the quick FAQ</a> ·
+    <a routerLink="/experience">See the full career journey</a>
+  </p>
+</ui-panel>

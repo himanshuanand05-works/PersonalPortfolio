@@ -1,0 +1,38 @@
+---
+description: Standalone Angular component, routing, and TypeScript conventions
+globs: src/app/**/*.{ts,html}
+alwaysApply: false
+---
+
+# Angular components
+
+This app uses Angular 22 standalone components. Do not add NgModules or `standalone: true` (it is the default).
+
+## Components
+
+- Feature pages: class name `XPage`, files `x.ts` / `x.html` / `x.scss`, no selector (routed).
+- Shared UI: selector `ui-*` (`UiPanel`, `UiIcon`, …), `input()` signals, BEM class names.
+- Template control flow: `@if`, `@for` (with `track`), `@switch` — not `*ngIf` / `*ngFor`.
+- DI: `inject()` in the field or constructor. Expose template data as `protected readonly`.
+- Prefer `signal()` for UI state (`sidebarOpen`). Keep page data as imported constants unless it changes.
+
+```typescript
+@Component({
+  imports: [RouterLink, UiPanel],
+  styleUrl: './contact.scss',
+  templateUrl: './contact.html',
+})
+export class ContactPage {
+  protected readonly profile = PROFILE;
+}
+```
+
+## Routing
+
+- Register pages with `loadComponent: () => import('…').then((m) => m.XPage)`.
+- Set `data: { title: '…' }` for the shell title.
+- Bind public URLs with `routerLink`, not `href`, for in-app navigation.
+
+## Tests
+
+- Vitest + `TestBed`. Provide `SITE_CONFIG` and `provideRouter` when the shell or pages need them.

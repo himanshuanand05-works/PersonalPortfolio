@@ -1,0 +1,25 @@
+<ui-section-header kicker="~/experience" title="Career journey" [lead]="journey" />
+
+<div class="timeline">
+  @for (job of experiences; track job.id; let first = $first) {
+    <article class="job" [class.job--first]="first">
+      <div class="job__rail" aria-hidden="true">
+        <span class="job__dot"></span>
+      </div>
+      <ui-panel [kicker]="job.period" [title]="job.role">
+        <p class="job__company">{{ job.company }}</p>
+        <p class="job__summary">{{ job.summary }}</p>
+        <ul class="job__highlights">
+          @for (item of job.highlights; track item) {
+            <li>{{ item }}</li>
+          }
+        </ul>
+        <div class="chips">
+          @for (tag of job.tags; track tag) {
+            <ui-tag-chip [label]="tag" [accent]="first" />
+          }
+        </div>
+      </ui-panel>
+    </article>
+  }
+</div>

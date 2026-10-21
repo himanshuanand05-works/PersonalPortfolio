@@ -1,0 +1,48 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [master, main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build AEO assets + static site
+        # For a *user/organization* site (repo named <user>.github.io) or a custom
+        # domain, use: ng build   (base href "/").
+        # For a project site, keep --base-href=/PersonalPortfolio/ matching the repo name.
+        run: node scripts/build-meta.mjs && npx ng build --base-href=/PersonalPortfolio/ && node scripts/postbuild.mjs
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist/portfolio/browser
+
+      - name: Deploy
+        uses: actions/deploy-pages@v4

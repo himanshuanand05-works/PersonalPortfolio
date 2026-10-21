@@ -1,0 +1,14 @@
+{
+  "siteUrl": "",
+  "_siteUrlTodo": "TODO: optional absolute origin override (e.g. https://himanshuanand.dev). Leave EMPTY to auto-derive from the deployed base href at runtime — canonical URLs, JSON-LD and static HTML then adapt to any GitHub URL automatically. sitemap.xml + the robots.txt Sitemap line are only generated once this is set.",
+  "siteName": "Himanshu Anand",
+  "tagline": "Senior Full-Stack & Node.js Backend Engineer",
+  "locale": "en-US",
+  "jobTitle": "Lead / Senior Software Engineer",
+  "location": "Noida, India",
+  "sameAs": [
+    "https://linkedin.com/in/himanshuanand05",
+    "https://github.com/himanshuanand05-works",
+    "https://www.npmjs.com/package/@himanshuanand05/face-clustering"
+  ]
+}

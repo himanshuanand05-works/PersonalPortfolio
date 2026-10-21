@@ -1,0 +1,35 @@
+---
+description: How to update profile copy, typed data, and knowledge articles
+globs: "{content/**,src/app/core/data/**,src/app/core/models/**,src/app/core/site.config.ts}"
+alwaysApply: false
+---
+
+# Content and data
+
+Facts live in TypeScript constants and markdown — not in feature templates.
+
+## Typed data
+
+- Shape lives in `src/app/core/models/profile.models.ts`.
+- Values live in `src/app/core/data/*.data.ts` (`profile`, `experience`, `projects`, `skills`, `faq`).
+- Site identity / JSON-LD base: `content/site.config.json` **and** `src/app/core/site.config.ts` — keep them aligned.
+- Leave `siteUrl` empty unless an absolute public origin is required for sitemap/robots.
+
+```typescript
+// ❌ BAD — copy only in the template
+<p>Himanshu Anand is a senior engineer…</p>
+
+// ✅ GOOD — bind PROFILE / EXPERIENCE / PROJECTS
+<p>{{ profile.shortAnswer }}</p>
+```
+
+## Articles
+
+- Add `content/articles/<slug>.md` with YAML frontmatter: `title`, `description`, `date`, `tags`, `readingTime`.
+- Slug = filename without `.md`. Then run `npm run content` (also runs on `prebuild`).
+- Do not edit `articles.generated.ts`.
+
+## Voice
+
+- First person in articles is fine; site chrome and FAQ answers speak about Himanshu in third person for AEO (answer-engine) snippets.
+- Keep metrics and employers consistent with `experience.data.ts` and `PROFILE.stats`.

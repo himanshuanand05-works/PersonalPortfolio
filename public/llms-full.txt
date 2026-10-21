@@ -1,0 +1,179 @@
+# Himanshu Anand — Senior Full-Stack & Node.js Backend Engineer
+
+> Himanshu Anand is a senior full-stack software engineer based in Noida, India, with 7+ years of experience building Node.js, NestJS and TypeScript microservices, event-driven systems (Kafka, SAGA, CQRS, transactional outbox) and Agentic RAG platforms with LLM guardrails. He is open to senior/lead backend and full-stack opportunities.
+
+## Key pages
+
+- [Overview](/): Identity, key metrics and featured projects
+- [Experience](/experience): Career journey across 5 companies with quantified impact
+- [Projects](/projects): AI Financial Wellness Assistant, face clustering npm library, alphabet learning app
+- [Skills](/skills): Full technical skill matrix by domain
+- [Knowledge](/knowledge): Engineering write-ups on reliability and AI systems
+- [FAQ](/faq): Direct answers to common questions about Himanshu Anand
+- [Resume](/resume): HTML resume plus downloadable PDF
+- [Contact](/contact): Email, phone, LinkedIn and GitHub
+
+## Facts
+
+- Name: Himanshu Anand
+- Title: Lead / Senior Software Engineer — Senior Full-Stack & Node.js Backend Engineer
+- Location: Noida, India
+- Experience: 7+ years in backend and full-stack engineering
+- Core stack: Node.js, TypeScript, NestJS, Express, REST, BFF
+- Architecture: microservices, event-driven, DDD, SAGA, CQRS, transactional outbox/inbox, idempotency
+- Messaging & cache: Kafka, Redis
+- Data: MongoDB, PostgreSQL, MySQL, Cassandra, Elasticsearch, vector databases
+- Cloud: AWS, GCP, Azure, Docker, Kubernetes, CI/CD
+- Frontend: Angular, React, Next.js, SSR, micro-frontends
+- AI: Agentic RAG, LangChain, LangGraph, MCP, Azure AI Foundry, LLM guardrails, RBAC
+- Email: himanshuanand05@gmail.com
+- Phone: +91-9457177820
+- LinkedIn: https://linkedin.com/in/himanshuanand05
+- GitHub: https://github.com/himanshuanand05-works
+- npm: https://www.npmjs.com/package/@himanshuanand05/face-clustering
+- Status: Open to senior backend / full-stack opportunities
+
+## Articles
+
+- ["Transactional Outbox Pattern: Eliminating Ghost Events in Event-Driven Systems"](/knowledge/transactional-outbox-pattern): "How duplicate and ghost events appear in distributed systems, and how the transactional outbox/inbox pattern with idempotency and resumable processing makes event delivery reliable."
+- ["Building Agentic RAG Systems With Guardrails, Grounding and RBAC"](/knowledge/agentic-rag-guardrails): "A production-minded blueprint for Agentic RAG: modular retrieval pipelines, response grounding, RBAC, sensitive-data masking and LLM guardrails that reduce hallucination for real users."
+
+
+---
+
+# Full article content
+
+## "Transactional Outbox Pattern: Eliminating Ghost Events in Event-Driven Systems"
+
+Published: 2026-09-18 · Tags: Node.js, Kafka, Event-Driven, Reliability
+
+"How duplicate and ghost events appear in distributed systems, and how the transactional outbox/inbox pattern with idempotency and resumable processing makes event delivery reliable."
+
+In event-driven architectures, the same bug shows up in every postmortem: a payment event processed twice, a notification sent three times, a projection that silently drifts from the source of truth. These are 
+ghost events
+ — messages that appear, reappear, or arrive without a durable cause you can trace back.
+
+Why ghost events happen
+
+The root cause is almost always the same: the database write and the message publish are two separate operations. If the service commits the transaction and then crashes before publishing, the state changed but nothing was emitted. If it publishes first and the transaction rolls back, the world hears about work that never happened. Retries and broker redelivery amplify both failure modes.
+
+The outbox pattern
+
+Instead of publishing directly, the service writes the event to an 
+outbox table inside the same transaction
+ as the domain state change. A relay process reads the outbox and publishes to the broker, then marks entries as dispatched.
+
+Atomicity: the event exists if and only if the state change committed.
+
+At-least-once delivery: the relay can crash and resume without losing events.
+
+Ordering: events for an aggregate can be dispatched in commit order.
+
+On the consumer side, the mirror pattern is the 
+inbox (idempotency) table
+. Each incoming event carries a stable identifier; the consumer records processed identifiers and skips duplicates. Combined with resumable processing state — checkpoints describing exactly where a consumer stopped — recovery after a failure becomes a matter of replaying from the checkpoint rather than guessing.
+
+What this looked like in production
+
+While working on distributed services at DBiz-AI, investigating duplicate and ghost event scenarios led to implementing transactional outbox/inbox with idempotency keys and resumable processing state. Paired with aggregate decomposition and CQRS-style read/write separation, the result was a platform where message delivery was auditable, recovery was deterministic, and database query time dropped by up to 50% in the heaviest paths.
+
+Takeaways
+
+Never publish outside the transaction boundary — write to an outbox instead.
+
+Make consumers idempotent with an inbox keyed on the event id.
+
+Persist processing checkpoints so restarts resume instead of replay blindly.
+
+Treat duplicate handling as a first-class design requirement, not an edge case.
+
+---
+
+## "Building Agentic RAG Systems With Guardrails, Grounding and RBAC"
+
+Published: 2026-08-04 · Tags: AI, Agentic RAG, LLM, Security
+
+"A production-minded blueprint for Agentic RAG: modular retrieval pipelines, response grounding, RBAC, sensitive-data masking and LLM guardrails that reduce hallucination for real users."
+
+Retrieval-augmented generation is straightforward to demo and hard to productionize. The gap between the two is almost entirely about control: what the model may retrieve, what it may say, and which user is allowed to ask.
+
+A modular retrieval pipeline
+
+Treat retrieval as a pipeline of replaceable stages rather than one monolithic call:
+
+Ingestion
+ — crawl websites and parse documents into normalized chunks.
+
+Chunking
+ — support fixed-size, recursive and semantic strategies, configurable per source.
+
+Retrieval
+ — hybrid search over vector and lexical indexes, with reranking.
+
+Prompt construction
+ — assemble grounded context with explicit source attribution.
+
+Summarization
+ — compress long contexts into answer-ready evidence.
+
+Each stage should be independently testable and observable, because when answer quality drops you need to know whether ingestion, retrieval or generation is at fault.
+
+Grounding before generation
+
+An answer is only as trustworthy as its sources. Grounding means every claim in the response must map to retrieved evidence, and the system must abstain when evidence is missing. In practice this means structured prompt contracts, citation requirements, and post-generation checks that flag responses unsupported by retrieved context.
+
+Guardrails, RBAC and masking
+
+Three layers keep the system safe for real users:
+
+RBAC at retrieval time
+ — filter documents by the requesting user&#39;s permissions 
+before
+ they ever reach the prompt, so the model cannot leak what the user should not see.
+
+Sensitive-data masking
+ — strip or tokenize PII in both retrieved context and model output.
+
+LLM guardrails
+ — schema-validate outputs, block off-topic or policy-violating responses, and route risky queries to refusal templates instead of free-form generation.
+
+These layers are not bolted on after launch; they shape the pipeline from day one. At HighLevel, an Agentic RAG system built with response grounding, RBAC, masking and guardrails was associated with measurably better product outcomes — 15% higher customer retention and 10% higher daily active users for the capability&#39;s surface.
+
+Agents need protocols, not just prompts
+
+Once retrieval works, the next step is letting agents act. Exposing existing APIs through an 
+MCP (Model Context Protocol) server
+ turns internal capabilities into tools agents can discover and call — with the same auth boundaries your application already enforces. Combined with event-driven processing and a centralized Redis store for rate limiting and access control, agentic features stay fast and contained under real traffic.
+
+Takeaways
+
+Build retrieval as a modular pipeline; observe every stage.
+
+Ground every answer in evidence and allow abstention.
+
+Enforce RBAC at retrieval time and mask sensitive data in transit.
+
+Validate outputs with guardrails; expose capabilities to agents via MCP.
+
+
+---
+
+# Resume summary
+
+- Name: Himanshu Anand
+- Title: Lead / Senior Software Engineer — Senior Full-Stack & Node.js Backend Engineer
+- Location: Noida, India
+- Experience: 7+ years in backend and full-stack engineering
+- Core stack: Node.js, TypeScript, NestJS, Express, REST, BFF
+- Architecture: microservices, event-driven, DDD, SAGA, CQRS, transactional outbox/inbox, idempotency
+- Messaging & cache: Kafka, Redis
+- Data: MongoDB, PostgreSQL, MySQL, Cassandra, Elasticsearch, vector databases
+- Cloud: AWS, GCP, Azure, Docker, Kubernetes, CI/CD
+- Frontend: Angular, React, Next.js, SSR, micro-frontends
+- AI: Agentic RAG, LangChain, LangGraph, MCP, Azure AI Foundry, LLM guardrails, RBAC
+- Email: himanshuanand05@gmail.com
+- Phone: +91-9457177820
+- LinkedIn: https://linkedin.com/in/himanshuanand05
+- GitHub: https://github.com/himanshuanand05-works
+- npm: https://www.npmjs.com/package/@himanshuanand05/face-clustering
+- Status: Open to senior backend / full-stack opportunities

@@ -1,0 +1,103 @@
+<ui-section-header
+  kicker="~/overview"
+  [title]="profile.name"
+  [lead]="profile.shortAnswer"
+/>
+
+<section class="hero">
+  <div class="hero__id">
+    <div class="hero__avatar" aria-hidden="true">HA</div>
+    <div class="hero__meta">
+      <h2 class="hero__name">{{ profile.name }}</h2>
+      <p class="hero__headline">{{ profile.headline }}</p>
+      <p class="hero__loc">
+        <ui-icon name="pin" />
+        {{ profile.location }}
+        <span class="hero__sep" aria-hidden="true">·</span>
+        <span class="status-inline">
+          <span class="status-inline__dot" aria-hidden="true"></span>
+          {{ profile.availability }}
+        </span>
+      </p>
+    </div>
+  </div>
+
+  <div class="hero__actions">
+    <a class="btn btn--primary" routerLink="/projects">
+      <ui-icon name="box" /> View projects
+    </a>
+    <a class="btn" routerLink="/resume">
+      <ui-icon name="file" /> Resume
+    </a>
+    <a class="btn" routerLink="/contact">
+      <ui-icon name="send" /> Contact
+    </a>
+  </div>
+</section>
+
+<section class="stats" aria-label="Key metrics">
+  @for (stat of profile.stats; track stat.label) {
+    <ui-stat-tile [value]="stat.value" [label]="stat.label" [detail]="stat.detail" />
+  }
+</section>
+
+<div class="grid">
+  <ui-panel kicker="now" title="Current focus">
+    <p>{{ latest.company }} · {{ latest.role }}</p>
+    <ul class="bullets">
+      @for (item of latest.highlights.slice(0, 3); track item) {
+        <li>{{ item }}</li>
+      }
+    </ul>
+    <a class="more" routerLink="/experience">
+      Full experience <ui-icon name="external" />
+    </a>
+  </ui-panel>
+
+  <ui-panel kicker="stack" title="Core technologies">
+    <div class="chips">
+      @for (skill of topSkills; track skill.name) {
+        <ui-tag-chip [label]="skill.name" accent />
+      }
+    </div>
+    <a class="more" routerLink="/skills">
+      All skills <ui-icon name="external" />
+    </a>
+  </ui-panel>
+
+  <ui-panel kicker="work" title="Featured projects" wide>
+    <div class="projects">
+      @for (project of projects; track project.id) {
+        <article class="project">
+          <div class="project__head">
+            <h3 class="project__name">{{ project.name }}</h3>
+            <span class="project__status">{{ project.status }}</span>
+          </div>
+          <p class="project__tagline">{{ project.tagline }}</p>
+          <div class="chips">
+            @for (tech of project.stack; track tech) {
+              <ui-tag-chip [label]="tech" />
+            }
+          </div>
+        </article>
+      }
+    </div>
+    <a class="more" routerLink="/projects">
+      All projects <ui-icon name="external" />
+    </a>
+  </ui-panel>
+
+  <ui-panel kicker="recognition" title="Achievements & credentials">
+    <ul class="bullets bullets--check">
+      @for (item of achievements; track item.name) {
+        <li>
+          <strong>{{ item.name }}</strong>
+          <span>{{ item.detail }}</span>
+        </li>
+      }
+    </ul>
+    <a class="more" routerLink="/faq">
+      Quick answers about me <ui-icon name="external" />
+    </a>
+  </ui-panel>
+</div>

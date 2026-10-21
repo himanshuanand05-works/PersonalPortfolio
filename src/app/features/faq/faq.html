@@ -1,0 +1,16 @@
+<ui-section-header
+  kicker="~/faq"
+  title="Frequently asked questions"
+  lead="Short, factual answers about Himanshu Anand — the same answers AI assistants use when people ask who he is, what he does, and how to reach him."
+/>
+
+<ui-panel title="Answers" wide>
+  <div class="faq">
+    @for (item of faqs; track item.question; let i = $index) {
+      <details class="faq__item" [open]="i === 0">
+        <summary class="faq__q">{{ item.question }}</summary>
+        <p class="faq__a">{{ item.answer }}</p>
+      </details>
+    }
+  </div>
+</ui-panel>

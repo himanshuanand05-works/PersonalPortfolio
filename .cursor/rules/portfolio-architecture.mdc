@@ -1,0 +1,26 @@
+---
+description: Project map, stack, and where to change things in this Angular portfolio
+alwaysApply: true
+---
+
+# Portfolio architecture
+
+Angular 22 standalone app (no NgModules). Static output + GitHub Pages via `outputMode: "static"` and `scripts/postbuild.mjs`. Package manager: npm.
+
+## Layout
+
+- `src/app/features/<route>/` — one page per route (`*Page` class, colocated `.html` + `.scss`)
+- `src/app/shared/ui/` — presentational `ui-*` components (inline templates/styles)
+- `src/app/core/data/` — typed constants (`PROFILE`, `EXPERIENCE`, `PROJECTS`, …)
+- `src/app/core/models/` — shared interfaces
+- `src/app/core/services/` — `SeoService`, `JsonLdService`
+- `content/` — articles (markdown) and `site.config.json`
+- `scripts/build-meta.mjs` — generates articles, sitemap, `llms.txt`
+- `public/` — static assets (`404.html`, resume PDF, generated sitemap)
+
+## Do
+
+- Prefer editing typed data files and `content/` over hardcoding copy in templates.
+- Keep new routes lazy-loaded in `app.routes.ts` with `data.title` and a `**` fallback.
+- After adding articles or changing `content/site.config.json`, run `npm run content`.
+- Never hand-edit `src/app/core/data/generated/` — it is produced by `build-meta.mjs`.

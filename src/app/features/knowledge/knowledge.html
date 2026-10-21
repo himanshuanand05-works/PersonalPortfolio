@@ -1,0 +1,35 @@
+<ui-section-header
+  kicker="~/knowledge"
+  title="Knowledge base"
+  lead="Practical engineering notes from production systems — the same patterns used to keep event-driven platforms reliable and LLM-powered features safe for real users."
+/>
+
+<div class="articles">
+  @for (article of articles; track article.slug) {
+    <article class="article-card">
+      <div class="article-card__meta">
+        <time [attr.datetime]="article.date">{{ article.date }}</time>
+        <span aria-hidden="true">·</span>
+        <span>{{ article.readingTime }}</span>
+      </div>
+      <h2 class="article-card__title">
+        <a [routerLink]="['/knowledge', article.slug]">{{ article.title }}</a>
+      </h2>
+      <p class="article-card__desc">{{ article.description }}</p>
+      <div class="chips">
+        @for (tag of article.tags; track tag) {
+          <ui-tag-chip [label]="tag" accent />
+        }
+      </div>
+      <a class="article-card__link" [routerLink]="['/knowledge', article.slug]">
+        Read article <ui-icon name="external" />
+      </a>
+    </article>
+  }
+</div>
+
+@if (articles.length === 0) {
+  <ui-panel title="Nothing published yet">
+    <p>Articles will appear here as they are added.</p>
+  </ui-panel>
+}

@@ -1,0 +1,90 @@
+<ui-section-header
+  kicker="~/resume"
+  title="Resume"
+  [lead]="profile.summary"
+/>
+
+<div class="resume-actions">
+  <a class="btn btn--primary" [href]="pdfHref" download>
+    <ui-icon name="download" /> Download PDF resume
+  </a>
+  <a class="btn" routerLink="/contact">
+    <ui-icon name="send" /> Contact me
+  </a>
+</div>
+
+<div class="resume">
+  <ui-panel kicker="profile" title="Professional summary">
+    <p>{{ profile.summary }}</p>
+  </ui-panel>
+
+  <ui-panel kicker="skills" title="Core technical skills">
+    <div class="skill-groups">
+      @for (group of skillGroups; track group.id) {
+        <div class="skill-group">
+          <h3 class="skill-group__title">{{ group.title }}</h3>
+          <div class="chips">
+            @for (skill of group.skills; track skill.name) {
+              <ui-tag-chip [label]="skill.name" />
+            }
+          </div>
+        </div>
+      }
+    </div>
+  </ui-panel>
+
+  <ui-panel kicker="experience" title="Professional experience">
+    <div class="xp">
+      @for (job of experiences; track job.id) {
+        <article class="xp__item">
+          <div class="xp__head">
+            <div>
+              <h3 class="xp__role">{{ job.role }}</h3>
+              <p class="xp__company">{{ job.company }}</p>
+            </div>
+            <span class="xp__period">{{ job.period }}</span>
+          </div>
+          <ul class="xp__list">
+            @for (item of job.highlights; track item) {
+              <li>{{ item }}</li>
+            }
+          </ul>
+        </article>
+      }
+    </div>
+  </ui-panel>
+
+  <ui-panel kicker="projects" title="Selected projects">
+    <ul class="xp__list">
+      @for (project of projects; track project.id) {
+        <li>
+          <strong>{{ project.name }}</strong> — {{ project.tagline }}
+          @if (project.href) {
+            <a [href]="project.href" rel="noopener noreferrer" target="_blank">
+              {{ project.hrefLabel }}
+            </a>
+          }
+        </li>
+      }
+    </ul>
+  </ui-panel>
+
+  <ui-panel kicker="education" title="Education & certifications">
+    <p class="edu">
+      <strong>{{ education.degree }}</strong> — {{ education.school }} ·
+      {{ education.year }} · {{ education.score }}
+    </p>
+    <p class="edu">
+      <strong>Certifications:</strong>
+      @for (cert of certifications; track cert.name; let last = $last) {
+        {{ cert.name }} ({{ cert.issuer }}){{ last ? '' : ' · ' }}
+      }
+    </p>
+    <p class="edu">
+      <strong>Achievements:</strong>
+      @for (item of achievements; track item.name; let last = $last) {
+        {{ item.name }}{{ last ? '' : ' · ' }}
+      }
+    </p>
+  </ui-panel>
+</div>

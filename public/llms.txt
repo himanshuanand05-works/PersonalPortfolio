@@ -1,0 +1,39 @@
+# Himanshu Anand — Senior Full-Stack & Node.js Backend Engineer
+
+> Himanshu Anand is a senior full-stack software engineer based in Noida, India, with 7+ years of experience building Node.js, NestJS and TypeScript microservices, event-driven systems (Kafka, SAGA, CQRS, transactional outbox) and Agentic RAG platforms with LLM guardrails. He is open to senior/lead backend and full-stack opportunities.
+
+## Key pages
+
+- [Overview](/): Identity, key metrics and featured projects
+- [Experience](/experience): Career journey across 5 companies with quantified impact
+- [Projects](/projects): AI Financial Wellness Assistant, face clustering npm library, alphabet learning app
+- [Skills](/skills): Full technical skill matrix by domain
+- [Knowledge](/knowledge): Engineering write-ups on reliability and AI systems
+- [FAQ](/faq): Direct answers to common questions about Himanshu Anand
+- [Resume](/resume): HTML resume plus downloadable PDF
+- [Contact](/contact): Email, phone, LinkedIn and GitHub
+
+## Facts
+
+- Name: Himanshu Anand
+- Title: Lead / Senior Software Engineer — Senior Full-Stack & Node.js Backend Engineer
+- Location: Noida, India
+- Experience: 7+ years in backend and full-stack engineering
+- Core stack: Node.js, TypeScript, NestJS, Express, REST, BFF
+- Architecture: microservices, event-driven, DDD, SAGA, CQRS, transactional outbox/inbox, idempotency
+- Messaging & cache: Kafka, Redis
+- Data: MongoDB, PostgreSQL, MySQL, Cassandra, Elasticsearch, vector databases
+- Cloud: AWS, GCP, Azure, Docker, Kubernetes, CI/CD
+- Frontend: Angular, React, Next.js, SSR, micro-frontends
+- AI: Agentic RAG, LangChain, LangGraph, MCP, Azure AI Foundry, LLM guardrails, RBAC
+- Email: himanshuanand05@gmail.com
+- Phone: +91-9457177820
+- LinkedIn: https://linkedin.com/in/himanshuanand05
+- GitHub: https://github.com/himanshuanand05-works
+- npm: https://www.npmjs.com/package/@himanshuanand05/face-clustering
+- Status: Open to senior backend / full-stack opportunities
+
+## Articles
+
+- ["Transactional Outbox Pattern: Eliminating Ghost Events in Event-Driven Systems"](/knowledge/transactional-outbox-pattern): "How duplicate and ghost events appear in distributed systems, and how the transactional outbox/inbox pattern with idempotency and resumable processing makes event delivery reliable."
+- ["Building Agentic RAG Systems With Guardrails, Grounding and RBAC"](/knowledge/agentic-rag-guardrails): "A production-minded blueprint for Agentic RAG: modular retrieval pipelines, response grounding, RBAC, sensitive-data masking and LLM guardrails that reduce hallucination for real users."

@@ -1,0 +1,70 @@
+.timeline {
+  display: grid;
+  gap: 18px;
+}
+
+.job {
+  display: grid;
+  grid-template-columns: 24px 1fr;
+  gap: 14px;
+}
+
+.job__rail {
+  display: flex;
+  justify-content: center;
+  position: relative;
+}
+
+.job__rail::before {
+  content: '';
+  position: absolute;
+  top: 14px;
+  bottom: -32px;
+  width: 1px;
+  background: linear-gradient(var(--accent-line), transparent);
+}
+
+.job:last-child .job__rail::before {
+  display: none;
+}
+
+.job__dot {
+  width: 11px;
+  height: 11px;
+  margin-top: 18px;
+  border-radius: 50%;
+  background: var(--bg-0);
+  border: 2px solid var(--accent);
+  box-shadow: 0 0 14px var(--accent-glow);
+  z-index: 1;
+}
+
+.job__company {
+  font-family: var(--font-mono);
+  font-size: 0.86rem;
+  color: var(--accent);
+  margin: 0 0 8px;
+}
+
+.job__summary {
+  font-size: 0.95rem;
+  margin-bottom: 12px;
+}
+
+.job__highlights {
+  margin: 0 0 14px;
+  padding-left: 18px;
+  display: grid;
+  gap: 8px;
+  font-size: 0.9rem;
+}
+
+.job__highlights li::marker {
+  color: var(--accent);
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}

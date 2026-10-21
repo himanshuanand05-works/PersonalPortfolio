@@ -1,0 +1,81 @@
+<div class="shell">
+  <aside class="sidebar" [class.sidebar--open]="sidebarOpen()">
+    <a class="brand" routerLink="/">
+      <span class="brand__mono" aria-hidden="true">HA</span>
+      <span class="brand__text">
+        <strong>{{ profile.name }}</strong>
+        <small>Backend · Full-Stack</small>
+      </span>
+    </a>
+
+    <nav class="nav" aria-label="Primary">
+      @for (link of navLinks; track link.path) {
+        <a
+          class="nav__item"
+          [routerLink]="link.path"
+          routerLinkActive="nav__item--active"
+          [routerLinkActiveOptions]="{ exact: link.path === '/' }"
+        >
+          <span class="nav__kicker" aria-hidden="true">{{ link.kicker }}</span>
+          <ui-icon [name]="link.icon" class="nav__icon" />
+          <span class="nav__label">{{ link.label }}</span>
+        </a>
+      }
+    </nav>
+
+    <footer class="sidebar__foot">
+      <p class="status">
+        <span class="status__dot" aria-hidden="true"></span>
+        {{ profile.availability }}
+      </p>
+      <div class="sidebar__socials">
+        @for (social of profile.socials; track social.label) {
+          <a
+            [href]="social.url"
+            [attr.aria-label]="social.label"
+            [attr.title]="social.label"
+            rel="noopener noreferrer"
+            target="_blank"
+          >
+            <ui-icon [name]="social.icon" />
+          </a>
+        }
+      </div>
+    </footer>
+  </aside>
+
+  @if (sidebarOpen()) {
+    <div class="scrim" (click)="sidebarOpen.set(false)" aria-hidden="true"></div>
+  }
+
+  <div class="main">
+    <header class="topbar">
+      <button
+        type="button"
+        class="menu-btn"
+        (click)="sidebarOpen.update((open) => !open)"
+        [attr.aria-expanded]="sidebarOpen()"
+        aria-label="Toggle navigation"
+      >
+        <span></span><span></span><span></span>
+      </button>
+      <p class="crumbs">
+        <a routerLink="/">{{ profile.name }}</a>
+        <span aria-hidden="true">/</span>
+        <strong>{{ sectionTitle() }}</strong>
+      </p>
+      <a class="topbar__cta" routerLink="/contact">Get in touch</a>
+    </header>
+
+    <main class="content">
+      <router-outlet />
+    </main>
+
+    <footer class="page-footer">
+      <p>
+        © 2026 {{ profile.name }} — {{ profile.headline }}, {{ profile.location }}.
+        <a routerLink="/contact">Available for senior backend &amp; full-stack roles.</a>
+      </p>
+    </footer>
+  </div>
+</div>

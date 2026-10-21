@@ -1,0 +1,27 @@
+<article class="post">
+  <header class="post__header">
+    <div class="post__meta">
+      <time [attr.datetime]="article().date">{{ article().date }}</time>
+      <span aria-hidden="true">·</span>
+      <span>{{ article().readingTime }}</span>
+    </div>
+    <h1 class="post__title">{{ article().title }}</h1>
+    <p class="post__desc">{{ article().description }}</p>
+    <div class="chips">
+      @for (tag of article().tags; track tag) {
+        <ui-tag-chip [label]="tag" accent />
+      }
+    </div>
+  </header>
+
+  <div class="post__body" [innerHTML]="article().html"></div>
+
+  <footer class="post__footer">
+    <a routerLink="/knowledge">
+      <ui-icon name="book" /> All articles
+    </a>
+    <a routerLink="/contact">
+      <ui-icon name="send" /> Get in touch
+    </a>
+  </footer>
+</article>

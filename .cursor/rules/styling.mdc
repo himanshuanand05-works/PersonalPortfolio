@@ -1,0 +1,40 @@
+---
+description: Dark theme tokens, SCSS colocation, and BEM naming for the UI
+globs: "**/*.{scss,css,html}"
+alwaysApply: false
+---
+
+# Styling
+
+Dark, terminal-accent UI. Tokens live on `:root` in `src/styles.scss`. Do not introduce a second palette or a CSS framework.
+
+## Tokens
+
+Use existing variables: `--bg-0`–`--bg-3`, `--line`, `--text-1`–`--text-3`, `--accent`, `--accent-soft`, `--accent-line`, `--accent-glow`, `--font-sans`, `--font-mono`, `--radius`.
+
+```scss
+// ❌ BAD
+.card { background: #111; color: #eee; border-radius: 8px; }
+
+// ✅ GOOD
+.card {
+  background: var(--bg-2);
+  color: var(--text-2);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+}
+```
+
+## Structure
+
+- Global resets, buttons (`.btn`), and layout primitives: `src/styles.scss`.
+- Feature layout: colocated `feature.scss` with `styleUrl`.
+- Shared `ui-*` components: inline `styles` in the `@Component`.
+- Naming: BEM (`hero__avatar`, `panel--wide`). Kickers/labels use `--font-mono` and `--accent`.
+- Respect production style budgets (`anyComponentStyle` max ~12–16kB). Prefer tokens over duplicated gradients.
+
+## Accessibility
+
+- Decorative icons: `aria-hidden="true"`.
+- Icon-only or status dots need a text alternative or `aria-label` on the control.
+- Do not rely on color alone for availability/status.

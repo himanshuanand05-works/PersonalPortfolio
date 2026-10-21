@@ -1,0 +1,32 @@
+---
+description: SEO, JSON-LD, and GitHub Pages static-export conventions
+globs: "{src/app/core/services/**,src/app/app.routes.ts,src/app/features/**/*.ts,scripts/**,content/site.config.json}"
+alwaysApply: false
+---
+
+# SEO and static build
+
+Every routed page must set metadata and structured data in its constructor.
+
+```typescript
+constructor() {
+  const seo = inject(SeoService);
+  const jsonLd = inject(JsonLdService);
+  seo.set({ title: 'Projects', description: '…', path: '/projects' });
+  jsonLd.upsert('person', jsonLd.person());
+  jsonLd.upsert('breadcrumb', jsonLd.breadcrumb([
+    { name: 'Home', path: '/' },
+    { name: 'Projects', path: '/projects' },
+  ]));
+}
+```
+
+- `path` is site-root-relative (`/`, `/knowledge/slug`). `SeoService` derives the absolute base from `siteUrl` or `document.baseURI`.
+- Prefer `JsonLdService` helpers (`person`, `website`, `article`, `faqPage`, `breadcrumb`) over one-off hardcoded origins.
+- New public routes: add `app.routes.ts`, `scripts/build-meta.mjs` `STATIC_ROUTES`, and the postbuild route list so GitHub Pages deep links get a folder shell.
+
+## Scripts
+
+- `npm run content` / `prebuild` → `scripts/build-meta.mjs` (articles, sitemap, `llms.txt`).
+- `postbuild` / `build:pages` → `scripts/postbuild.mjs` (per-route `index.html`, `.nojekyll`).
+- GitHub Pages: `npm run build:pages` uses `--base-href=/PersonalPortfolio/`.
