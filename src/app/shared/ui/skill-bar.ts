@@ -20,6 +20,7 @@ import { Component, input } from '@angular/core';
     `
       .skill {
         display: grid;
+        grid-template-columns: minmax(0, 1fr);
         gap: 6px;
       }
 
@@ -27,6 +28,7 @@ import { Component, input } from '@angular/core';
         display: flex;
         align-items: baseline;
         gap: 8px;
+        flex-wrap: wrap;
       }
 
       .skill__name {
@@ -64,6 +66,12 @@ import { Component, input } from '@angular/core';
         border-radius: 4px;
         background: linear-gradient(90deg, rgba(0, 255, 156, 0.55), var(--accent));
         box-shadow: 0 0 12px var(--accent-glow);
+      }
+
+      @media (max-width: 480px) {
+        .skill__note {
+          margin-left: 0;
+        }
       }
     `,
   ],

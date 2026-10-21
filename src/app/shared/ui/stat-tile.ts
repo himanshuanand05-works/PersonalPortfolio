@@ -13,6 +13,11 @@ import { Component, input } from '@angular/core';
   `,
   styles: [
     `
+      :host {
+        display: block;
+        min-width: 0;
+      }
+
       .stat {
         display: flex;
         flex-direction: column;
@@ -48,6 +53,24 @@ import { Component, input } from '@angular/core';
       .stat__detail {
         font-size: 0.78rem;
         color: var(--text-3);
+      }
+
+      @media (max-width: 640px) {
+        .stat {
+          padding: 14px 14px 16px;
+        }
+
+        .stat__value {
+          font-size: 1.5rem;
+        }
+
+        .stat__label {
+          font-size: 0.8rem;
+        }
+
+        .stat__detail {
+          font-size: 0.72rem;
+        }
       }
     `,
   ],

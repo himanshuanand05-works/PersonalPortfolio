@@ -33,11 +33,13 @@
 
 .resume {
   display: grid;
+  grid-template-columns: minmax(0, 1fr);
   gap: 16px;
 }
 
 .skill-groups {
   display: grid;
+  grid-template-columns: minmax(0, 1fr);
   gap: 14px;
 }
 
@@ -58,6 +60,7 @@
 
 .xp {
   display: grid;
+  grid-template-columns: minmax(0, 1fr);
   gap: 18px;
 }
 
@@ -67,6 +70,7 @@
   justify-content: space-between;
   gap: 12px;
   margin-bottom: 8px;
+  flex-wrap: wrap;
 }
 
 .xp__role {
@@ -92,8 +96,10 @@
   margin: 0;
   padding-left: 18px;
   display: grid;
+  grid-template-columns: minmax(0, 1fr);
   gap: 6px;
   font-size: 0.88rem;
+  overflow-wrap: anywhere;
 }
 
 .xp__list li::marker {
@@ -112,5 +118,37 @@
     font-family: var(--font-mono);
     font-size: 0.8rem;
     word-break: break-all;
+  }
+}
+
+@media (max-width: 640px) {
+  .resume-actions {
+    gap: 8px;
+  }
+
+  .resume-actions .btn {
+    flex: 1 1 100%;
+    justify-content: center;
+  }
+
+  .resume {
+    gap: 12px;
+  }
+
+  .xp {
+    gap: 14px;
+  }
+
+  .xp__period {
+    white-space: normal;
+  }
+
+  .xp__list {
+    padding-left: 16px;
+    font-size: 0.86rem;
+  }
+
+  .edu {
+    font-size: 0.86rem;
   }
 }

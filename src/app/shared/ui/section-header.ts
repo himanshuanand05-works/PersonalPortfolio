@@ -60,6 +60,16 @@ import { Component, input } from '@angular/core';
       .section-header__meta {
         margin-top: 14px;
       }
+
+      @media (max-width: 640px) {
+        .section-header {
+          margin-bottom: 20px;
+        }
+
+        .section-header__lead {
+          font-size: 0.94rem;
+        }
+      }
     `,
   ],
 })

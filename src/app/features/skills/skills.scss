@@ -1,6 +1,6 @@
 .groups {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(330px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(330px, 100%), 1fr));
   gap: 16px;
   margin-bottom: 16px;
 }
@@ -12,6 +12,7 @@
 
 .group__bars {
   display: grid;
+  grid-template-columns: minmax(0, 1fr);
   gap: 12px;
 }
 
@@ -28,4 +29,19 @@
   content: '·';
   margin-left: 14px;
   color: var(--text-3);
+}
+
+@media (max-width: 640px) {
+  .groups {
+    gap: 12px;
+  }
+
+  .summary {
+    font-size: 0.74rem;
+    gap: 4px 8px;
+  }
+
+  .summary__item:not(:last-child)::after {
+    margin-left: 8px;
+  }
 }

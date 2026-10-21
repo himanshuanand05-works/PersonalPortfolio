@@ -1,11 +1,12 @@
 .timeline {
   display: grid;
+  grid-template-columns: minmax(0, 1fr);
   gap: 18px;
 }
 
 .job {
   display: grid;
-  grid-template-columns: 24px 1fr;
+  grid-template-columns: 24px minmax(0, 1fr);
   gap: 14px;
 }
 
@@ -55,6 +56,7 @@
   margin: 0 0 14px;
   padding-left: 18px;
   display: grid;
+  grid-template-columns: minmax(0, 1fr);
   gap: 8px;
   font-size: 0.9rem;
 }
@@ -67,4 +69,34 @@
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
+}
+
+@media (max-width: 640px) {
+  .timeline {
+    gap: 14px;
+  }
+
+  .job {
+    grid-template-columns: 18px 1fr;
+    gap: 10px;
+  }
+
+  .job__dot {
+    width: 9px;
+    height: 9px;
+    margin-top: 16px;
+  }
+
+  .job__company {
+    font-size: 0.8rem;
+  }
+
+  .job__summary {
+    font-size: 0.9rem;
+  }
+
+  .job__highlights {
+    padding-left: 16px;
+    font-size: 0.86rem;
+  }
 }

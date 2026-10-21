@@ -1,6 +1,6 @@
 <div class="shell">
   <aside class="sidebar" [class.sidebar--open]="sidebarOpen()">
-    <a class="brand" routerLink="/">
+    <a class="brand" routerLink="/" (click)="closeSidebar()">
       <span class="brand__mono" aria-hidden="true">HA</span>
       <span class="brand__text">
         <strong>{{ profile.name }}</strong>
@@ -8,13 +8,14 @@
       </span>
     </a>
 
-    <nav class="nav" aria-label="Primary">
+    <nav #primaryNav class="nav" id="primaryNav" aria-label="Primary" tabindex="-1">
       @for (link of navLinks; track link.path) {
         <a
           class="nav__item"
           [routerLink]="link.path"
           routerLinkActive="nav__item--active"
           [routerLinkActiveOptions]="{ exact: link.path === '/' }"
+          (click)="closeSidebar()"
         >
           <span class="nav__kicker" aria-hidden="true">{{ link.kicker }}</span>
           <ui-icon [name]="link.icon" class="nav__icon" />
@@ -51,10 +52,12 @@
   <div class="main">
     <header class="topbar">
       <button
+        #menuBtn
         type="button"
         class="menu-btn"
-        (click)="sidebarOpen.update((open) => !open)"
+        (click)="toggleSidebar()"
         [attr.aria-expanded]="sidebarOpen()"
+        aria-controls="primaryNav"
         aria-label="Toggle navigation"
       >
         <span></span><span></span><span></span>

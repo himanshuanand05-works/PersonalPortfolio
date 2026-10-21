@@ -9,6 +9,11 @@ import { Component, booleanAttribute, input } from '@angular/core';
   `,
   styles: [
     `
+      :host {
+        display: inline-flex;
+        max-width: 100%;
+      }
+
       .chip {
         display: inline-flex;
         align-items: center;
@@ -21,6 +26,9 @@ import { Component, booleanAttribute, input } from '@angular/core';
         border: 1px solid var(--line);
         border-radius: 999px;
         white-space: nowrap;
+        max-width: 100%;
+        overflow: hidden;
+        text-overflow: ellipsis;
       }
 
       .chip--accent {

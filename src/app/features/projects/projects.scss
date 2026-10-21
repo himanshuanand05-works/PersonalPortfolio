@@ -1,6 +1,6 @@
 .projects {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
   gap: 16px;
 }
 
@@ -26,6 +26,7 @@
   align-items: baseline;
   justify-content: space-between;
   gap: 12px;
+  flex-wrap: wrap;
 }
 
 .project__name {
@@ -69,4 +70,22 @@
   font-family: var(--font-mono);
   font-size: 0.78rem;
   word-break: break-all;
+}
+
+@media (max-width: 640px) {
+  .projects {
+    gap: 12px;
+  }
+
+  .project {
+    padding: 18px;
+  }
+
+  .project__name {
+    font-size: 1.04rem;
+  }
+
+  .project__desc {
+    font-size: 0.88rem;
+  }
 }

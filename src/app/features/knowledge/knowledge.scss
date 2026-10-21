@@ -1,5 +1,6 @@
 .articles {
   display: grid;
+  grid-template-columns: minmax(0, 1fr);
   gap: 16px;
 }
 
@@ -18,6 +19,7 @@
 
 .article-card__meta {
   display: flex;
+  flex-wrap: wrap;
   gap: 8px;
   font-family: var(--font-mono);
   font-size: 0.72rem;
@@ -58,4 +60,18 @@
   font-size: 0.76rem;
   letter-spacing: 0.05em;
   text-transform: uppercase;
+}
+
+@media (max-width: 640px) {
+  .articles {
+    gap: 12px;
+  }
+
+  .article-card {
+    padding: 18px;
+  }
+
+  .article-card__title {
+    font-size: 1.08rem;
+  }
 }

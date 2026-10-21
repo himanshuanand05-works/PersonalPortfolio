@@ -26,6 +26,11 @@ import { Component, booleanAttribute, input } from '@angular/core';
   `,
   styles: [
     `
+      :host {
+        display: block;
+        min-width: 0;
+      }
+
       .panel {
         position: relative;
         background: linear-gradient(180deg, rgba(20, 32, 58, 0.55), rgba(14, 21, 36, 0.9));
@@ -57,6 +62,7 @@ import { Component, booleanAttribute, input } from '@angular/core';
         justify-content: space-between;
         gap: 16px;
         margin-bottom: 16px;
+        flex-wrap: wrap;
       }
 
       .panel__kicker {
@@ -82,6 +88,25 @@ import { Component, booleanAttribute, input } from '@angular/core';
 
       .panel--wide {
         grid-column: 1 / -1;
+      }
+
+      @media (max-width: 640px) {
+        .panel {
+          padding: 16px 16px 18px;
+        }
+
+        .panel::before {
+          left: 16px;
+        }
+
+        .panel__head {
+          gap: 10px;
+          margin-bottom: 12px;
+        }
+
+        .panel__title {
+          font-size: 1.05rem;
+        }
       }
     `,
   ],
