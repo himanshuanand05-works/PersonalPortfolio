@@ -4,6 +4,8 @@ Angular 22 standalone app for [himanshuanand05-works](https://github.com/himansh
 
 Live site: <https://himanshuanand05-works.github.io/PersonalPortfolio/>
 
+[![Deploy to GitHub Pages](https://github.com/himanshuanand05-works/PersonalPortfolio/actions/workflows/deploy.yml/badge.svg)](https://github.com/himanshuanand05-works/PersonalPortfolio/actions/workflows/deploy.yml)
+
 ## Stack
 
 Angular 22 (standalone, signals, lazy routes) · SCSS · Vitest · Node 24 · npm
