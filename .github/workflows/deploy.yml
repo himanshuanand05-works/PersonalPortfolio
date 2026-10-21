@@ -37,12 +37,12 @@ jobs:
         run: npm run build:pages
 
       - name: Setup Pages
+        # Requires the Pages source to be "GitHub Actions":
+        # Settings -> Pages -> Build and deployment -> Source: GitHub Actions
+        # If the source is "Deploy from a branch", GitHub's legacy
+        # pages-build-deployment workflow publishes the repo root instead of
+        # this build and the site renders README.md.
         uses: actions/configure-pages@v6
-        with:
-          # Enables Pages automatically if it is not enabled yet. Requires admin
-          # access to the repository; if it fails, enable it manually in
-          # Settings -> Pages -> Build and deployment -> Source: GitHub Actions.
-          enablement: true
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v5
