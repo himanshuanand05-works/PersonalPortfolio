@@ -33,3 +33,4 @@ Allow: /
 User-agent: Claude-Web
 Allow: /
 
+Sitemap: https://himanshuanand05-works.github.io/PersonalPortfolio/sitemap.xml

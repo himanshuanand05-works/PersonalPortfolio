@@ -19,10 +19,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       - name: Setup Node
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v7
         with:
           node-version: 24
           cache: npm
@@ -32,17 +32,30 @@ jobs:
 
       - name: Build AEO assets + static site
         # For a *user/organization* site (repo named <user>.github.io) or a custom
-        # domain, use: ng build   (base href "/").
+        # domain, use: npm run build   (base href "/").
         # For a project site, keep --base-href=/PersonalPortfolio/ matching the repo name.
-        run: node scripts/build-meta.mjs && npx ng build --base-href=/PersonalPortfolio/ && node scripts/postbuild.mjs
+        run: npm run build:pages
 
       - name: Setup Pages
-        uses: actions/configure-pages@v5
+        uses: actions/configure-pages@v6
+        with:
+          # Enables Pages automatically if it is not enabled yet. Requires admin
+          # access to the repository; if it fails, enable it manually in
+          # Settings -> Pages -> Build and deployment -> Source: GitHub Actions.
+          enablement: true
 
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@v5
         with:
           path: dist/portfolio/browser
 
-      - name: Deploy
-        uses: actions/deploy-pages@v4
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v5

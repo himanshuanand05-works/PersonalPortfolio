@@ -1,6 +1,6 @@
 {
-  "siteUrl": "",
-  "_siteUrlTodo": "TODO: optional absolute origin override (e.g. https://himanshuanand.dev). Leave EMPTY to auto-derive from the deployed base href at runtime — canonical URLs, JSON-LD and static HTML then adapt to any GitHub URL automatically. sitemap.xml + the robots.txt Sitemap line are only generated once this is set.",
+  "siteUrl": "https://himanshuanand05-works.github.io/PersonalPortfolio",
+  "_siteUrlTodo": "Absolute origin of the deployed site. Used for sitemap.xml, the robots.txt Sitemap line and the llms.txt links. Runtime canonical/OG URLs are derived from the deployed <base href>, so they stay correct on any host. Set to '' if you move to a custom domain (e.g. https://himanshuanand.dev).",
   "siteName": "Himanshu Anand",
   "tagline": "Senior Full-Stack & Node.js Backend Engineer",
   "locale": "en-US",
