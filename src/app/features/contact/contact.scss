@@ -14,18 +14,26 @@
   border: 1px solid var(--line);
   border-radius: var(--radius);
   color: var(--text-1);
-  transition: border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+  transition:
+    border-color 0.2s ease,
+    transform 0.25s var(--ease-out),
+    box-shadow 0.25s ease;
 }
 
 .card:hover {
   border-color: var(--accent-line);
-  transform: translateY(-2px);
+  transform: translateY(-3px);
   box-shadow: 0 14px 36px -22px var(--accent-glow);
 }
 
 .card__icon {
   font-size: 1.5rem;
   color: var(--accent);
+  transition: transform 0.25s var(--ease-out);
+}
+
+.card:hover .card__icon {
+  transform: scale(1.12);
 }
 
 .card__label {
@@ -60,6 +68,13 @@
   border-radius: 50%;
   background: var(--accent);
   box-shadow: 0 0 12px var(--accent-glow);
+  animation: pulse-ring 2.4s var(--ease-out) infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card:hover {
+    transform: none;
+  }
 }
 
 @media (max-width: 640px) {

@@ -5,15 +5,20 @@ import { JsonLdService } from '../../core/services/json-ld.service';
 import { UiPanel } from '../../shared/ui/panel';
 import { UiSectionHeader } from '../../shared/ui/section-header';
 import { UiSkillBar } from '../../shared/ui/skill-bar';
+import { RevealDirective } from '../../shared/directives/reveal.directive';
 
 @Component({
-  imports: [UiPanel, UiSectionHeader, UiSkillBar],
+  imports: [UiPanel, UiSectionHeader, UiSkillBar, RevealDirective],
   styleUrl: './skills.scss',
   templateUrl: './skills.html',
 })
 export class SkillsPage {
   protected readonly groups = SKILL_GROUPS;
   protected readonly allSkills = SKILL_GROUPS.flatMap((g) => g.skills.map((s) => s.name));
+
+  protected stagger(index: number): number {
+    return Math.min(index, 4) * 80;
+  }
 
   constructor() {
     const seo = inject(SeoService);

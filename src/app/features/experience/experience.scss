@@ -23,6 +23,17 @@
   bottom: -32px;
   width: 1px;
   background: linear-gradient(var(--accent-line), transparent);
+  transform-origin: top;
+  animation: rail-grow 0.9s var(--ease-out) both;
+}
+
+@keyframes rail-grow {
+  from {
+    transform: scaleY(0);
+  }
+  to {
+    transform: scaleY(1);
+  }
 }
 
 .job:last-child .job__rail::before {

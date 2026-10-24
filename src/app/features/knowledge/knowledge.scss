@@ -9,12 +9,16 @@
   background: linear-gradient(180deg, rgba(20, 32, 58, 0.55), rgba(14, 21, 36, 0.9));
   border: 1px solid var(--line);
   border-radius: var(--radius);
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.25s ease,
+    transform 0.25s var(--ease-out);
 }
 
 .article-card:hover {
   border-color: var(--accent-line);
   box-shadow: 0 14px 40px -24px var(--accent-glow);
+  transform: translateY(-3px);
 }
 
 .article-card__meta {
@@ -60,6 +64,20 @@
   font-size: 0.76rem;
   letter-spacing: 0.05em;
   text-transform: uppercase;
+}
+
+.article-card__link ui-icon {
+  transition: transform 0.2s var(--ease-out);
+}
+
+.article-card__link:hover ui-icon {
+  transform: translate(3px, -2px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .article-card:hover {
+    transform: none;
+  }
 }
 
 @media (max-width: 640px) {

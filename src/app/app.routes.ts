@@ -1,5 +1,9 @@
 import { Routes } from '@angular/router';
-import { withInMemoryScrolling, withComponentInputBinding } from '@angular/router';
+import {
+  withInMemoryScrolling,
+  withComponentInputBinding,
+  withViewTransitions,
+} from '@angular/router';
 
 export const routes: Routes = [
   {
@@ -60,4 +64,5 @@ export const routes: Routes = [
 export const routerProviders = [
   withInMemoryScrolling({ scrollPositionRestoration: 'top' }),
   withComponentInputBinding(),
+  withViewTransitions(),
 ];

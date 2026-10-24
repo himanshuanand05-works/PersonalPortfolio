@@ -6,15 +6,20 @@ import { JsonLdService } from '../../core/services/json-ld.service';
 import { UiSectionHeader } from '../../shared/ui/section-header';
 import { UiPanel } from '../../shared/ui/panel';
 import { UiIcon } from '../../shared/ui/icon';
+import { RevealDirective } from '../../shared/directives/reveal.directive';
 
 @Component({
-  imports: [RouterLink, UiSectionHeader, UiPanel, UiIcon],
+  imports: [RouterLink, UiSectionHeader, UiPanel, UiIcon, RevealDirective],
   styleUrl: './contact.scss',
   templateUrl: './contact.html',
 })
 export class ContactPage {
   protected readonly profile = PROFILE;
   protected readonly pdfHref = 'resume/Himanshu_Anand_Resume.pdf';
+
+  protected stagger(index: number): number {
+    return Math.min(index, 5) * 70;
+  }
 
   protected readonly emailHref = `mailto:${PROFILE.email}?subject=Opportunity%20for%20${encodeURIComponent(
     PROFILE.name,

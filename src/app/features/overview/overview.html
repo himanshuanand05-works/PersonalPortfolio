@@ -2,14 +2,18 @@
   kicker="~/overview"
   [title]="profile.name"
   [lead]="profile.shortAnswer"
+  appReveal
 />
 
-<section class="hero">
+<section class="hero" appReveal [revealDelay]="80">
   <div class="hero__id">
     <div class="hero__avatar" aria-hidden="true">HA</div>
     <div class="hero__meta">
       <h2 class="hero__name">{{ profile.name }}</h2>
-      <p class="hero__headline">{{ profile.headline }}</p>
+      <p class="hero__headline">
+        {{ profile.headline }}
+        <span class="hero__caret" aria-hidden="true"></span>
+      </p>
       <p class="hero__loc">
         <ui-icon name="pin" />
         {{ profile.location }}
@@ -36,13 +40,19 @@
 </section>
 
 <section class="stats" aria-label="Key metrics">
-  @for (stat of profile.stats; track stat.label) {
-    <ui-stat-tile [value]="stat.value" [label]="stat.label" [detail]="stat.detail" />
+  @for (stat of profile.stats; track stat.label; let i = $index) {
+    <ui-stat-tile
+      appReveal
+      [revealDelay]="stagger(i)"
+      [value]="stat.value"
+      [label]="stat.label"
+      [detail]="stat.detail"
+    />
   }
 </section>
 
 <div class="grid">
-  <ui-panel kicker="now" title="Current focus">
+  <ui-panel kicker="now" title="Current focus" appReveal>
     <p>{{ latest.company }} · {{ latest.role }}</p>
     <ul class="bullets">
       @for (item of latest.highlights.slice(0, 3); track item) {
@@ -54,7 +64,7 @@
     </a>
   </ui-panel>
 
-  <ui-panel kicker="stack" title="Core technologies">
+  <ui-panel kicker="stack" title="Core technologies" appReveal [revealDelay]="70">
     <div class="chips">
       @for (skill of topSkills; track skill.name) {
         <ui-tag-chip [label]="skill.name" accent />
@@ -65,7 +75,7 @@
     </a>
   </ui-panel>
 
-  <ui-panel kicker="work" title="Featured projects" wide>
+  <ui-panel kicker="work" title="Featured projects" wide appReveal [revealDelay]="140">
     <div class="projects">
       @for (project of projects; track project.id) {
         <article class="project">
@@ -87,7 +97,7 @@
     </a>
   </ui-panel>
 
-  <ui-panel kicker="recognition" title="Achievements & credentials">
+  <ui-panel kicker="recognition" title="Achievements & credentials" appReveal [revealDelay]="210">
     <ul class="bullets bullets--check">
       @for (item of achievements; track item.name) {
         <li>

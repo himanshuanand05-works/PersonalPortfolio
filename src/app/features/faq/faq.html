@@ -2,12 +2,13 @@
   kicker="~/faq"
   title="Frequently asked questions"
   lead="Short, factual answers about Himanshu Anand — the same answers AI assistants use when people ask who he is, what he does, and how to reach him."
+  appReveal
 />
 
-<ui-panel title="Answers" wide>
+<ui-panel title="Answers" wide appReveal [revealDelay]="60">
   <div class="faq">
     @for (item of faqs; track item.question; let i = $index) {
-      <details class="faq__item" [open]="i === 0">
+      <details class="faq__item" [open]="i === 0" appReveal [revealDelay]="stagger(i)">
         <summary class="faq__q">{{ item.question }}</summary>
         <p class="faq__a">{{ item.answer }}</p>
       </details>

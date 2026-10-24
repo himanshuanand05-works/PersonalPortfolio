@@ -9,11 +9,18 @@
   border-radius: 10px;
   background: rgba(10, 15, 28, 0.55);
   overflow: hidden;
-  transition: border-color 0.15s ease;
+  transition:
+    border-color 0.2s ease,
+    background 0.2s ease;
+}
+
+.faq__item:hover {
+  border-color: var(--accent-line);
 }
 
 .faq__item[open] {
   border-color: var(--accent-line);
+  background: rgba(14, 21, 36, 0.75);
 }
 
 .faq__q {
@@ -26,6 +33,11 @@
   font-size: 0.95rem;
   color: var(--text-1);
   list-style: none;
+  transition: color 0.2s ease;
+}
+
+.faq__q:hover {
+  color: var(--accent);
 }
 
 .faq__q::-webkit-details-marker {
@@ -36,7 +48,7 @@
   content: '›';
   font-family: var(--font-mono);
   color: var(--accent);
-  transition: transform 0.15s ease;
+  transition: transform 0.25s var(--ease-out);
 }
 
 .faq__item[open] .faq__q::before {
@@ -47,6 +59,7 @@
   padding: 0 18px 16px 42px;
   margin: 0;
   font-size: 0.92rem;
+  animation: fade-up 0.32s var(--ease-out) both;
 }
 
 @media (max-width: 640px) {

@@ -10,9 +10,10 @@ import { UiSectionHeader } from '../../shared/ui/section-header';
 import { UiPanel } from '../../shared/ui/panel';
 import { UiTagChip } from '../../shared/ui/tag-chip';
 import { UiIcon } from '../../shared/ui/icon';
+import { RevealDirective } from '../../shared/directives/reveal.directive';
 
 @Component({
-  imports: [RouterLink, UiSectionHeader, UiPanel, UiTagChip, UiIcon],
+  imports: [RouterLink, UiSectionHeader, UiPanel, UiTagChip, UiIcon, RevealDirective],
   styleUrl: './resume.scss',
   templateUrl: './resume.html',
 })
@@ -25,6 +26,10 @@ export class ResumePage {
   protected readonly certifications = CERTIFICATIONS;
   protected readonly achievements = ACHIEVEMENTS;
   protected readonly pdfHref = 'resume/Himanshu_Anand_Resume.pdf';
+
+  protected stagger(index: number): number {
+    return Math.min(index, 5) * 60;
+  }
 
   constructor() {
     const seo = inject(SeoService);

@@ -6,9 +6,10 @@ import { JsonLdService } from '../../core/services/json-ld.service';
 import { UiPanel } from '../../shared/ui/panel';
 import { UiSectionHeader } from '../../shared/ui/section-header';
 import { UiTagChip } from '../../shared/ui/tag-chip';
+import { RevealDirective } from '../../shared/directives/reveal.directive';
 
 @Component({
-  imports: [UiPanel, UiSectionHeader, UiTagChip],
+  imports: [UiPanel, UiSectionHeader, UiTagChip, RevealDirective],
   styleUrl: './experience.scss',
   templateUrl: './experience.html',
 })
@@ -16,6 +17,10 @@ export class ExperiencePage {
   protected readonly experiences = EXPERIENCE;
   protected readonly journey =
     'Himanshu Anand’s career journey runs from full-stack fleet analytics at The Smart Cube (100K+ DAU microservices), through real-time courtroom systems at Contata and fintech micro-frontends at iWebServices, to Agentic RAG platforms at HighLevel and lead-level distributed systems engineering at DBiz-AI using DDD, SAGA and CQRS.';
+
+  protected stagger(index: number): number {
+    return Math.min(index, 4) * 80;
+  }
 
   constructor() {
     const seo = inject(SeoService);

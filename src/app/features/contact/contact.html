@@ -2,10 +2,11 @@
   kicker="~/contact"
   title="Get in touch"
   [lead]="'Himanshu Anand is open to senior backend, platform and full-stack engineering opportunities — remote or in Noida, India. Reach out by email, phone or LinkedIn and expect a response within a day or two.'"
+  appReveal
 />
 
 <div class="contact-grid">
-  <a class="card" [href]="emailHref">
+  <a class="card" [href]="emailHref" appReveal [revealDelay]="stagger(0)">
     <ui-icon name="mail" class="card__icon" />
     <div>
       <h2 class="card__label">Email</h2>
@@ -13,7 +14,7 @@
     </div>
   </a>
 
-  <a class="card" [href]="telHref">
+  <a class="card" [href]="telHref" appReveal [revealDelay]="stagger(1)">
     <ui-icon name="send" class="card__icon" />
     <div>
       <h2 class="card__label">Phone</h2>
@@ -21,9 +22,16 @@
     </div>
   </a>
 
-  @for (social of profile.socials; track social.label) {
+  @for (social of profile.socials; track social.label; let i = $index) {
     @if (social.icon !== 'mail') {
-      <a class="card" [href]="social.url" rel="noopener noreferrer" target="_blank">
+      <a
+        class="card"
+        [href]="social.url"
+        rel="noopener noreferrer"
+        target="_blank"
+        appReveal
+        [revealDelay]="stagger(i + 2)"
+      >
         <ui-icon [name]="social.icon" class="card__icon" />
         <div>
           <h2 class="card__label">{{ social.label }}</h2>
@@ -34,7 +42,7 @@
   }
 </div>
 
-<ui-panel kicker="availability" title="Current status" wide>
+<ui-panel kicker="availability" title="Current status" wide appReveal [revealDelay]="120">
   <p class="status-line">
     <span class="status-line__dot" aria-hidden="true"></span>
     {{ profile.availability }} · {{ profile.location }}

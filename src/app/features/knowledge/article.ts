@@ -5,9 +5,10 @@ import { SeoService } from '../../core/services/seo.service';
 import { JsonLdService } from '../../core/services/json-ld.service';
 import { UiTagChip } from '../../shared/ui/tag-chip';
 import { UiIcon } from '../../shared/ui/icon';
+import { RevealDirective } from '../../shared/directives/reveal.directive';
 
 @Component({
-  imports: [RouterLink, UiTagChip, UiIcon],
+  imports: [RouterLink, UiTagChip, UiIcon, RevealDirective],
   styleUrl: './article.scss',
   templateUrl: './article.html',
 })

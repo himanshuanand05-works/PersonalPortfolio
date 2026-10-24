@@ -4,14 +4,19 @@ import { SeoService } from '../../core/services/seo.service';
 import { JsonLdService } from '../../core/services/json-ld.service';
 import { UiSectionHeader } from '../../shared/ui/section-header';
 import { UiPanel } from '../../shared/ui/panel';
+import { RevealDirective } from '../../shared/directives/reveal.directive';
 
 @Component({
-  imports: [UiSectionHeader, UiPanel],
+  imports: [UiSectionHeader, UiPanel, RevealDirective],
   styleUrl: './faq.scss',
   templateUrl: './faq.html',
 })
 export class FaqPage {
   protected readonly faqs = FAQS;
+
+  protected stagger(index: number): number {
+    return Math.min(index, 5) * 50;
+  }
 
   constructor() {
     const seo = inject(SeoService);

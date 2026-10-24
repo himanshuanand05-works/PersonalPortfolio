@@ -1,5 +1,5 @@
 <article class="post">
-  <header class="post__header">
+  <header class="post__header" appReveal>
     <div class="post__meta">
       <time [attr.datetime]="article().date">{{ article().date }}</time>
       <span aria-hidden="true">·</span>
@@ -14,9 +14,9 @@
     </div>
   </header>
 
-  <div class="post__body" [innerHTML]="article().html"></div>
+  <div class="post__body" [innerHTML]="article().html" appReveal [revealDelay]="80"></div>
 
-  <footer class="post__footer">
+  <footer class="post__footer" appReveal [revealDelay]="140">
     <a routerLink="/knowledge">
       <ui-icon name="book" /> All articles
     </a>

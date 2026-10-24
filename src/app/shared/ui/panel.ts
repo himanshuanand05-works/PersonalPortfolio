@@ -37,12 +37,17 @@ import { Component, booleanAttribute, input } from '@angular/core';
         border: 1px solid var(--line);
         border-radius: var(--radius);
         padding: 22px 24px;
-        transition: border-color 0.2s ease, box-shadow 0.2s ease;
+        overflow: hidden;
+        transition:
+          border-color 0.2s ease,
+          box-shadow 0.25s ease,
+          transform 0.25s var(--ease-out);
       }
 
       .panel:hover {
         border-color: var(--accent-line);
         box-shadow: 0 0 0 1px rgba(0, 255, 156, 0.06), 0 12px 40px -18px var(--accent-glow);
+        transform: translateY(-3px);
       }
 
       .panel::before {
@@ -106,6 +111,12 @@ import { Component, booleanAttribute, input } from '@angular/core';
 
         .panel__title {
           font-size: 1.05rem;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .panel:hover {
+          transform: none;
         }
       }
     `,

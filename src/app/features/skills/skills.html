@@ -2,11 +2,12 @@
   kicker="~/skills"
   title="Technical skill matrix"
   lead="Seven years of production experience across backend engineering, distributed systems architecture, cloud delivery, data platforms, frontends and AI integration — grouped the way engineering teams actually staff projects."
+  appReveal
 />
 
 <div class="groups">
-  @for (group of groups; track group.id) {
-    <ui-panel [kicker]="group.id" [title]="group.title">
+  @for (group of groups; track group.id; let i = $index) {
+    <ui-panel [kicker]="group.id" [title]="group.title" appReveal [revealDelay]="stagger(i)">
       <p class="group__blurb">{{ group.blurb }}</p>
       <div class="group__bars">
         @for (skill of group.skills; track skill.name) {
@@ -17,7 +18,7 @@
   }
 </div>
 
-<ui-panel kicker="summary" title="Everything at a glance" wide>
+<ui-panel kicker="summary" title="Everything at a glance" wide appReveal>
   <p class="summary">
     @for (skill of allSkills; track skill) {
       <span class="summary__item">{{ skill }}</span>

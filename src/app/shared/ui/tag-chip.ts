@@ -29,12 +29,29 @@ import { Component, booleanAttribute, input } from '@angular/core';
         max-width: 100%;
         overflow: hidden;
         text-overflow: ellipsis;
+        transition:
+          color 0.2s ease,
+          border-color 0.2s ease,
+          background 0.2s ease,
+          transform 0.2s var(--ease-out);
+      }
+
+      .chip:hover {
+        color: var(--text-1);
+        border-color: var(--accent-line);
+        transform: translateY(-1px);
       }
 
       .chip--accent {
         color: var(--accent);
         background: var(--accent-soft);
         border-color: var(--accent-line);
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .chip:hover {
+          transform: none;
+        }
       }
     `,
   ],

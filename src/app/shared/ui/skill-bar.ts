@@ -1,4 +1,6 @@
-import { Component, input } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
+import { Component, ElementRef, OnDestroy, PLATFORM_ID, inject, input, signal } from '@angular/core';
+import { observeInView, prefersReducedMotion } from '../utils/in-view';
 
 @Component({
   selector: 'ui-skill-bar',
@@ -12,12 +14,17 @@ import { Component, input } from '@angular/core';
         <span class="skill__level">{{ level() }}%</span>
       </div>
       <div class="skill__track" role="presentation">
-        <div class="skill__fill" [style.width.%]="level()"></div>
+        <div class="skill__fill" [style.width.%]="displayLevel() ?? 0"></div>
       </div>
     </div>
   `,
   styles: [
     `
+      :host {
+        display: block;
+        min-width: 0;
+      }
+
       .skill {
         display: grid;
         grid-template-columns: minmax(0, 1fr);
@@ -66,6 +73,7 @@ import { Component, input } from '@angular/core';
         border-radius: 4px;
         background: linear-gradient(90deg, rgba(0, 255, 156, 0.55), var(--accent));
         box-shadow: 0 0 12px var(--accent-glow);
+        transition: width 0.9s var(--ease-out);
       }
 
       @media (max-width: 480px) {
@@ -76,8 +84,37 @@ import { Component, input } from '@angular/core';
     `,
   ],
 })
-export class UiSkillBar {
+export class UiSkillBar implements OnDestroy {
   name = input.required<string>();
   level = input.required<number>();
   note = input<string>();
+
+  protected readonly displayLevel = signal<number | null>(null);
+
+  private readonly host = inject<ElementRef<HTMLElement>>(ElementRef);
+  private readonly isBrowser = isPlatformBrowser(inject(PLATFORM_ID));
+  private teardown: (() => void) | undefined;
+
+  ngOnInit(): void {
+    if (!this.isBrowser) {
+      return;
+    }
+
+    if (prefersReducedMotion()) {
+      this.displayLevel.set(this.level());
+      return;
+    }
+
+    this.teardown = observeInView(this.host.nativeElement, () => {
+      this.displayLevel.set(0);
+      // Two frames: the first paints the empty track, the second starts the fill.
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => this.displayLevel.set(this.level()));
+      });
+    });
+  }
+
+  ngOnDestroy(): void {
+    this.teardown?.();
+  }
 }

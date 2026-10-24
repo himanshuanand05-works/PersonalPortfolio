@@ -16,6 +16,11 @@ import { Component, input } from '@angular/core';
   `,
   styles: [
     `
+      :host {
+        display: block;
+        min-width: 0;
+      }
+
       .section-header {
         margin-bottom: 28px;
       }

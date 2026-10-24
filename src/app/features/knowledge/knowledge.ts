@@ -7,14 +7,19 @@ import { UiSectionHeader } from '../../shared/ui/section-header';
 import { UiPanel } from '../../shared/ui/panel';
 import { UiTagChip } from '../../shared/ui/tag-chip';
 import { UiIcon } from '../../shared/ui/icon';
+import { RevealDirective } from '../../shared/directives/reveal.directive';
 
 @Component({
-  imports: [RouterLink, UiSectionHeader, UiPanel, UiTagChip, UiIcon],
+  imports: [RouterLink, UiSectionHeader, UiPanel, UiTagChip, UiIcon, RevealDirective],
   styleUrl: './knowledge.scss',
   templateUrl: './knowledge.html',
 })
 export class KnowledgePage {
   protected readonly articles = ARTICLES;
+
+  protected stagger(index: number): number {
+    return Math.min(index, 5) * 80;
+  }
 
   constructor() {
     const seo = inject(SeoService);

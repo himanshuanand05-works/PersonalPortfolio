@@ -2,11 +2,12 @@
   kicker="~/knowledge"
   title="Knowledge base"
   lead="Practical engineering notes from production systems — the same patterns used to keep event-driven platforms reliable and LLM-powered features safe for real users."
+  appReveal
 />
 
 <div class="articles">
-  @for (article of articles; track article.slug) {
-    <article class="article-card">
+  @for (article of articles; track article.slug; let i = $index) {
+    <article class="article-card" appReveal [revealDelay]="stagger(i)">
       <div class="article-card__meta">
         <time [attr.datetime]="article.date">{{ article.date }}</time>
         <span aria-hidden="true">·</span>

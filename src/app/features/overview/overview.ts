@@ -11,9 +11,18 @@ import { UiSectionHeader } from '../../shared/ui/section-header';
 import { UiStatTile } from '../../shared/ui/stat-tile';
 import { UiTagChip } from '../../shared/ui/tag-chip';
 import { UiIcon } from '../../shared/ui/icon';
+import { RevealDirective } from '../../shared/directives/reveal.directive';
 
 @Component({
-  imports: [RouterLink, UiPanel, UiSectionHeader, UiStatTile, UiTagChip, UiIcon],
+  imports: [
+    RouterLink,
+    UiPanel,
+    UiSectionHeader,
+    UiStatTile,
+    UiTagChip,
+    UiIcon,
+    RevealDirective,
+  ],
   styleUrl: './overview.scss',
   templateUrl: './overview.html',
 })
@@ -25,6 +34,10 @@ export class OverviewPage {
   protected readonly topSkills = SKILL_GROUPS.flatMap((g) => g.skills)
     .sort((a, b) => b.level - a.level)
     .slice(0, 10);
+
+  protected stagger(index: number): number {
+    return Math.min(index, 4) * 70;
+  }
 
   constructor() {
     const seo = inject(SeoService);

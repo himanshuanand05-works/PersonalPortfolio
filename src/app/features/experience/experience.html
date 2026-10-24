@@ -1,8 +1,8 @@
-<ui-section-header kicker="~/experience" title="Career journey" [lead]="journey" />
+<ui-section-header kicker="~/experience" title="Career journey" [lead]="journey" appReveal />
 
 <div class="timeline">
-  @for (job of experiences; track job.id; let first = $first) {
-    <article class="job" [class.job--first]="first">
+  @for (job of experiences; track job.id; let first = $first; let i = $index) {
+    <article class="job" [class.job--first]="first" appReveal [revealDelay]="stagger(i)">
       <div class="job__rail" aria-hidden="true">
         <span class="job__dot"></span>
       </div>

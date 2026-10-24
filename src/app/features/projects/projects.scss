@@ -12,12 +12,15 @@
   background: linear-gradient(180deg, rgba(20, 32, 58, 0.55), rgba(14, 21, 36, 0.9));
   border: 1px solid var(--line);
   border-radius: var(--radius);
-  transition: border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+  transition:
+    border-color 0.2s ease,
+    transform 0.25s var(--ease-out),
+    box-shadow 0.25s ease;
 }
 
 .project:hover {
   border-color: var(--accent-line);
-  transform: translateY(-3px);
+  transform: translateY(-4px);
   box-shadow: 0 18px 44px -24px var(--accent-glow);
 }
 
@@ -70,6 +73,20 @@
   font-family: var(--font-mono);
   font-size: 0.78rem;
   word-break: break-all;
+}
+
+.project__link ui-icon {
+  transition: transform 0.2s var(--ease-out);
+}
+
+.project__link:hover ui-icon {
+  transform: translate(2px, -2px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .project:hover {
+    transform: none;
+  }
 }
 
 @media (max-width: 640px) {

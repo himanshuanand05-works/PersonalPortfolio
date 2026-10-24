@@ -2,9 +2,10 @@
   kicker="~/resume"
   title="Resume"
   [lead]="profile.summary"
+  appReveal
 />
 
-<div class="resume-actions">
+<div class="resume-actions" appReveal [revealDelay]="60">
   <a class="btn btn--primary" [href]="pdfHref" download>
     <ui-icon name="download" /> Download PDF resume
   </a>
@@ -14,11 +15,11 @@
 </div>
 
 <div class="resume">
-  <ui-panel kicker="profile" title="Professional summary">
+  <ui-panel kicker="profile" title="Professional summary" appReveal>
     <p>{{ profile.summary }}</p>
   </ui-panel>
 
-  <ui-panel kicker="skills" title="Core technical skills">
+  <ui-panel kicker="skills" title="Core technical skills" appReveal [revealDelay]="60">
     <div class="skill-groups">
       @for (group of skillGroups; track group.id) {
         <div class="skill-group">
@@ -33,7 +34,7 @@
     </div>
   </ui-panel>
 
-  <ui-panel kicker="experience" title="Professional experience">
+  <ui-panel kicker="experience" title="Professional experience" appReveal [revealDelay]="120">
     <div class="xp">
       @for (job of experiences; track job.id) {
         <article class="xp__item">
@@ -54,7 +55,7 @@
     </div>
   </ui-panel>
 
-  <ui-panel kicker="projects" title="Selected projects">
+  <ui-panel kicker="projects" title="Personal projects" appReveal [revealDelay]="180">
     <ul class="xp__list">
       @for (project of projects; track project.id) {
         <li>
@@ -69,7 +70,7 @@
     </ul>
   </ui-panel>
 
-  <ui-panel kicker="education" title="Education & certifications">
+  <ui-panel kicker="education" title="Education & certifications" appReveal [revealDelay]="240">
     <p class="edu">
       <strong>{{ education.degree }}</strong> — {{ education.school }} ·
       {{ education.year }} · {{ education.score }}
